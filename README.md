@@ -32,10 +32,10 @@ git clone https://github.com/Mukuwul/STOCKER.git
 cd STOCKER
 
 2. **Install dependencies**
-npm install
+``` npm install ```
 
 3. **Start the server**     
-npm start
+``` npm start ```
 
 
 ## API Endpoints
