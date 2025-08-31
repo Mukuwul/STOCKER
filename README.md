@@ -59,8 +59,7 @@ npm start
 | `JWT_SECRET` | JWT secret key | Yes |
 
 ## Project Structure
-/// 
-STOCKER/
+``` STOCKER/
 ├── controllers/
 ├── models/
 ├── routes/
@@ -70,7 +69,7 @@ STOCKER/
 ├── .gitignore
 ├── package.json
 └── server.js
-///
+```
 ## License
 
 This project is licensed under the MIT License
