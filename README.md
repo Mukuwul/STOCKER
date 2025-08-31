@@ -28,7 +28,7 @@ A backend service for inventory and stock management providing secure RESTful AP
 ### Installation
 
 1. **Clone the repository**
-git clone https://github.com/YOUR_USERNAME/STOCKER.git
+git clone https://github.com/Mukuwul/STOCKER.git
 cd STOCKER
 
 2. **Install dependencies**
