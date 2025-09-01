@@ -38,7 +38,7 @@ cd STOCKER
 ``` npm start ```
 
 
-## API Endpoints
+### API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register user
