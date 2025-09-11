@@ -76,4 +76,4 @@ This project is licensed under the MIT License
 
 ## Contact
 
-Mukul Negi - nmukul32@gmail.com
+Mukul Negi -  nmukul32@gmail.com
