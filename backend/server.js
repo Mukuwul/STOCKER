@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const colors = require("colors");
 const morgan = require("morgan");
 const cors = require("cors");
+const compression = require("compression");
 const connectDB = require("./config/db");
 const errorHandler = require("./middlewares/errorMiddleware");
 
@@ -18,6 +19,7 @@ const app = express();
 
 // Middlewares
 app.use(express.json());
+app.use(compression());
 app.use(cors());
 app.use(morgan("dev"));
 

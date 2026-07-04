@@ -19,4 +19,8 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// Speeds up "my orders" lookups: filter by user + sort by newest.
+// Without this, MongoDB does a full collection scan of every order.
+orderSchema.index({ user: 1, createdAt: -1 });
+
 module.exports = mongoose.model("Order", orderSchema);

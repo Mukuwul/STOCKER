@@ -49,7 +49,7 @@ const deleteProduct = async (req, res) => {
 // All Users: Get Products
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().lean();
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
