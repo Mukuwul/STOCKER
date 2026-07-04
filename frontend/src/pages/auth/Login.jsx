@@ -84,8 +84,8 @@ const Login = () => {
             </p>
           </div>
           <div className="relative flex items-center gap-6 text-sm text-white/70">
-            <span>📦 Real-time stock</span>
-            <span>⚡ Fast orders</span>
+            <span> Real-time stock</span>
+            <span> Fast orders</span>
           </div>
         </div>
 
