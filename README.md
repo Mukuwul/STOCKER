@@ -2,6 +2,11 @@
 
 A backend service for inventory and stock management providing secure RESTful APIs for product tracking, inventory updates, and warehouse operations.
 
+## Live Demo
+
+- Frontend: https://stocker-sigma.vercel.app
+- Backend API: https://stocker-zzue.onrender.com
+
 ## Features
 
 - 🔐 User authentication and role-based access control
