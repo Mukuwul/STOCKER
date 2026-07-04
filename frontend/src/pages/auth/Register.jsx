@@ -52,25 +52,68 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8">
-        <div className="card">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Join STOCKER
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 bg-mesh px-4 py-10">
+      {/* Decorative blobs */}
+      <div className="pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-fuchsia-300/30 blur-3xl" />
+      <div className="pointer-events-none absolute -right-24 bottom-1/4 h-72 w-72 rounded-full bg-brand-300/30 blur-3xl" />
+
+      <div className="grid w-full max-w-4xl animate-scale-in overflow-hidden rounded-3xl bg-white shadow-[0_30px_80px_-20px_rgba(16,24,40,0.35)] md:grid-cols-2">
+        {/* Brand panel */}
+        <div className="relative hidden flex-col justify-between bg-gradient-to-br from-fuchsia-600 via-violet-600 to-brand-600 p-10 text-white md:flex">
+          <div className="absolute inset-0 opacity-20 [background:radial-gradient(circle_at_20%_20%,white,transparent_40%),radial-gradient(circle_at_80%_60%,white,transparent_35%)]" />
+          <div className="relative flex items-center gap-2.5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-6 w-6"
+              >
+                <path d="M3 7l9-4 9 4-9 4-9-4z" />
+                <path d="M3 7v10l9 4 9-4V7" />
+                <path d="M12 11v10" />
+              </svg>
+            </span>
+            <span className="text-2xl font-extrabold tracking-tight">STOCKER</span>
+          </div>
+          <div className="relative">
+            <h1 className="text-3xl font-extrabold leading-tight">
+              Start managing smarter today.
+            </h1>
+            <p className="mt-4 max-w-sm text-white/80">
+              Create your account and get instant access to products, orders,
+              and real-time inventory insights.
+            </p>
+          </div>
+          <div className="relative flex items-center gap-6 text-sm text-white/70">
+            <span>🔐 Secure</span>
+            <span>🚀 Free to start</span>
+          </div>
+        </div>
+
+        {/* Form panel */}
+        <div className="p-8 sm:p-10">
+          <div className="mb-7">
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
+              Create account
             </h2>
-            <p className="text-gray-600">Create your account</p>
+            <p className="mt-1 text-slate-500">Join STOCKER in seconds</p>
           </div>
 
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+            <div className="alert-error mb-5 animate-fade-in">
+              <span>⚠️</span>
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                 Full Name
               </label>
               <input
@@ -85,7 +128,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                 Email Address
               </label>
               <input
@@ -94,13 +137,13 @@ const Register = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="input-field w-full"
-                placeholder="Enter your email"
+                placeholder="you@example.com"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                 Password
               </label>
               <input
@@ -116,7 +159,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                 Account Type
               </label>
               <select
@@ -133,25 +176,21 @@ const Register = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`btn-primary w-full ${
-                loading ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className="btn-primary w-full py-3 text-base"
             >
               {loading ? "Creating Account..." : "Create Account"}
             </button>
           </form>
 
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account?{" "}
-              <Link
-                to="/login"
-                className="font-medium text-blue-600 hover:text-blue-500"
-              >
-                Sign in here
-              </Link>
-            </p>
-          </div>
+          <p className="mt-6 text-center text-sm text-slate-500">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold text-brand-600 hover:text-brand-700"
+            >
+              Sign in here
+            </Link>
+          </p>
         </div>
       </div>
     </div>

@@ -1,24 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles for STOCKER */
-.btn-primary {
-  @apply bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors;
+/* ===== Base ===== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    @apply bg-brand-200 text-brand-900;
+  }
 }
 
-.btn-secondary {
-  @apply bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors;
+/* ===== Custom scrollbar ===== */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-full border-2 border-solid border-transparent bg-clip-content;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
 }
 
-.btn-danger {
-  @apply bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors;
-}
+/* ===== Components ===== */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-brand-500 to-violet-600 px-5 py-2.5 font-semibold text-white shadow-glow transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0;
+  }
 
-.input-field {
-  @apply border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500;
-}
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-2.5 font-semibold text-slate-700 ring-1 ring-slate-200 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-50 hover:ring-slate-300 active:translate-y-0;
+  }
 
-.card {
-  @apply bg-white rounded-lg shadow-md p-6 border border-gray-200;
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-rose-500 to-red-600 px-5 py-2.5 font-semibold text-white shadow-[0_10px_30px_-10px_rgba(225,29,72,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0;
+  }
+
+  .btn-success {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 px-5 py-2.5 font-semibold text-white shadow-[0_10px_30px_-10px_rgba(16,185,129,0.5)] transition-all duration-200 hover:-translate-y-0.5 hover:brightness-110 active:translate-y-0;
+  }
+
+  .input-field {
+    @apply rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-slate-800 placeholder:text-slate-400 shadow-sm transition-all duration-200 focus:outline-none focus:border-brand-400 focus:ring-4 focus:ring-brand-100;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white p-6 shadow-card ring-1 ring-slate-100 transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(16,24,40,0.2)] hover:ring-slate-200;
+  }
+
+  .glass-card {
+    @apply rounded-3xl border border-white/60 bg-white/80 p-8 shadow-[0_20px_60px_-15px_rgba(16,24,40,0.25)] backdrop-blur-xl;
+  }
+
+  .alert-error {
+    @apply flex items-center gap-3 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700;
+  }
+
+  .alert-success {
+    @apply flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent;
+  }
 }

@@ -57,93 +57,97 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-slate-50">
         <Navbar />
-        <div className="flex justify-center items-center h-96">
-          <div className="text-xl">Loading dashboard...</div>
+        <div className="flex h-96 flex-col items-center justify-center gap-4">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-brand-100 border-t-brand-600" />
+          <div className="text-slate-500">Loading dashboard...</div>
         </div>
       </div>
     );
   }
 
+  const statCards = [
+    {
+      label: "Total Products",
+      value: stats.totalProducts,
+      icon: "📦",
+      gradient: "from-brand-500 to-violet-600",
+    },
+    {
+      label: "Total Orders",
+      value: stats.totalOrders,
+      icon: "🛒",
+      gradient: "from-emerald-500 to-green-600",
+    },
+    {
+      label: "Pending Orders",
+      value: stats.pendingOrders,
+      icon: "⏳",
+      gradient: "from-amber-500 to-orange-500",
+    },
+    {
+      label: "Total Revenue",
+      value: `₹${stats.totalRevenue.toFixed(2)}`,
+      icon: "💰",
+      gradient: "from-fuchsia-500 to-pink-600",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50 bg-mesh">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
-          Admin Dashboard
-        </h1>
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mb-8 animate-fade-in-up">
+          <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+            Admin <span className="text-gradient">Dashboard</span>
+          </h1>
+          <p className="mt-1 text-slate-500">
+            An overview of your store's performance.
+          </p>
+        </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+          <div className="alert-error mb-6 animate-fade-in">
+            <span>⚠️</span>
             {error}
           </div>
         )}
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="card bg-blue-50 border-l-4 border-blue-500">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-blue-600 text-sm font-medium">
-                  Total Products
-                </p>
-                <p className="text-3xl font-bold text-blue-900">
-                  {stats.totalProducts}
-                </p>
+        <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {statCards.map((s) => (
+            <div
+              key={s.label}
+              className="card card-hover relative overflow-hidden animate-fade-in-up"
+            >
+              <div
+                className={`absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gradient-to-br ${s.gradient} opacity-10`}
+              />
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-slate-500">
+                    {s.label}
+                  </p>
+                  <p className="mt-1 text-3xl font-extrabold text-slate-900">
+                    {s.value}
+                  </p>
+                </div>
+                <div
+                  className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${s.gradient} text-2xl shadow-glow`}
+                >
+                  {s.icon}
+                </div>
               </div>
-              <div className="text-blue-500 text-3xl">📦</div>
             </div>
-          </div>
-
-          <div className="card bg-green-50 border-l-4 border-green-500">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-green-600 text-sm font-medium">
-                  Total Orders
-                </p>
-                <p className="text-3xl font-bold text-green-900">
-                  {stats.totalOrders}
-                </p>
-              </div>
-              <div className="text-green-500 text-3xl">🛒</div>
-            </div>
-          </div>
-
-          <div className="card bg-yellow-50 border-l-4 border-yellow-500">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-yellow-600 text-sm font-medium">
-                  Pending Orders
-                </p>
-                <p className="text-3xl font-bold text-yellow-900">
-                  {stats.pendingOrders}
-                </p>
-              </div>
-              <div className="text-yellow-500 text-3xl">⏳</div>
-            </div>
-          </div>
-
-          <div className="card bg-purple-50 border-l-4 border-purple-500">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-purple-600 text-sm font-medium">
-                  Total Revenue
-                </p>
-                <p className="text-3xl font-bold text-purple-900">
-                  ₹{stats.totalRevenue.toFixed(2)}
-                </p>
-              </div>
-              <div className="text-purple-500 text-3xl">💰</div>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Order Status Overview */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="card">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <h3 className="mb-4 text-lg font-bold text-slate-900">
               Order Status Breakdown
             </h3>
             <div className="space-y-4">
@@ -216,23 +220,35 @@ const Dashboard = () => {
           </div>
 
           <div className="card lg:col-span-2">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <h3 className="mb-4 text-lg font-bold text-slate-900">
               Quick Actions
             </h3>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <button
                 onClick={() => (window.location.href = "/admin/products")}
-                className="btn-primary text-center py-4"
+                className="group flex flex-col items-start gap-3 rounded-2xl bg-gradient-to-br from-brand-500 to-violet-600 p-6 text-left text-white shadow-glow transition-all duration-200 hover:-translate-y-1 hover:brightness-110"
               >
-                <div className="text-2xl mb-2">📦</div>
-                Manage Products
+                <span className="text-3xl">📦</span>
+                <div>
+                  <p className="text-lg font-bold">Manage Products</p>
+                  <p className="text-sm text-white/80">
+                    Add, edit or remove items
+                  </p>
+                </div>
               </button>
               <button
                 onClick={() => (window.location.href = "/admin/orders")}
-                className="btn-secondary text-center py-4"
+                className="group flex flex-col items-start gap-3 rounded-2xl bg-white p-6 text-left ring-1 ring-slate-200 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:ring-brand-200"
               >
-                <div className="text-2xl mb-2">🛒</div>
-                Manage Orders
+                <span className="text-3xl">🛒</span>
+                <div>
+                  <p className="text-lg font-bold text-slate-900">
+                    Manage Orders
+                  </p>
+                  <p className="text-sm text-slate-500">
+                    Approve or decline orders
+                  </p>
+                </div>
               </button>
             </div>
           </div>

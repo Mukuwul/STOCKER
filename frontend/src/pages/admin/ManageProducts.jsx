@@ -116,117 +116,147 @@ const ManageProducts = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-slate-50">
         <Navbar />
-        <div className="flex justify-center items-center h-96">
-          <div className="text-xl">Loading products...</div>
+        <div className="flex h-96 flex-col items-center justify-center gap-4">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-brand-100 border-t-brand-600" />
+          <div className="text-slate-500">Loading products...</div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-50 bg-mesh">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Manage Products</h1>
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 animate-fade-in-up">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+              Manage <span className="text-gradient">Products</span>
+            </h1>
+            <p className="mt-1 text-slate-500">
+              {products.length} product{products.length !== 1 ? "s" : ""} in
+              your catalog.
+            </p>
+          </div>
           <button onClick={() => openModal()} className="btn-primary">
-            Add New Product
+            <span className="text-lg leading-none">+</span> Add New Product
           </button>
         </div>
 
         {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+          <div className="alert-error mb-6 animate-fade-in">
+            <span>⚠️</span>
             {error}
           </div>
         )}
 
         {success && (
-          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
+          <div className="alert-success mb-6 animate-fade-in">
+            <span>✅</span>
             {success}
           </div>
         )}
 
         {/* Products Table */}
-        <div className="card">
+        <div className="card overflow-hidden p-0">
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-slate-100">
+              <thead className="bg-slate-50/80">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
                     Product
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
                     Price
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
                     Stock
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
                     Created
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-slate-500">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="divide-y divide-slate-100">
                 {products.length === 0 ? (
                   <tr>
                     <td
                       colSpan="5"
-                      className="px-6 py-4 text-center text-gray-500"
+                      className="px-6 py-10 text-center text-slate-400"
                     >
                       No products found. Add your first product!
                     </td>
                   </tr>
                 ) : (
                   products.map((product) => (
-                    <tr key={product._id}>
+                    <tr
+                      key={product._id}
+                      className="transition-colors hover:bg-slate-50/70"
+                    >
                       <td className="px-6 py-4">
-                        <div>
-                          <div className="text-sm font-medium text-gray-900">
-                            {product.name}
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-brand-50 text-lg">
+                            📦
                           </div>
-                          <div className="text-sm text-gray-500">
-                            {product.description}
+                          <div>
+                            <div className="text-sm font-semibold text-slate-900">
+                              {product.name}
+                            </div>
+                            <div className="max-w-xs truncate text-sm text-slate-500">
+                              {product.description}
+                            </div>
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-900">
+                      <td className="px-6 py-4 text-sm font-semibold text-slate-900">
                         ₹{product.price}
                       </td>
                       <td className="px-6 py-4 text-sm">
                         <span
-                          className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
                             product.stock > 10
-                              ? "bg-green-100 text-green-800"
+                              ? "bg-emerald-50 text-emerald-700"
                               : product.stock > 0
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-red-100 text-red-800"
+                              ? "bg-amber-50 text-amber-700"
+                              : "bg-rose-50 text-rose-700"
                           }`}
                         >
+                          <span
+                            className={`h-1.5 w-1.5 rounded-full ${
+                              product.stock > 10
+                                ? "bg-emerald-500"
+                                : product.stock > 0
+                                ? "bg-amber-500"
+                                : "bg-rose-500"
+                            }`}
+                          />
                           {product.stock} units
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">
+                      <td className="px-6 py-4 text-sm text-slate-500">
                         {new Date(product.createdAt).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 text-sm space-x-2">
-                        <button
-                          onClick={() => openModal(product)}
-                          className="text-blue-600 hover:text-blue-900 font-medium"
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => deleteProduct(product._id)}
-                          className="text-red-600 hover:text-red-900 font-medium"
-                        >
-                          Delete
-                        </button>
+                      <td className="px-6 py-4 text-sm">
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => openModal(product)}
+                            className="rounded-lg px-3 py-1.5 font-semibold text-brand-600 transition hover:bg-brand-50"
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => deleteProduct(product._id)}
+                            className="rounded-lg px-3 py-1.5 font-semibold text-rose-600 transition hover:bg-rose-50"
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -238,17 +268,24 @@ const ManageProducts = () => {
 
         {/* Product Modal */}
         {showModal && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-            <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
-              <div className="mb-4">
-                <h3 className="text-lg font-bold text-gray-900">
+          <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-900/50 p-4 backdrop-blur-sm animate-fade-in">
+            <div className="relative mt-20 w-full max-w-md animate-scale-in rounded-2xl bg-white p-6 shadow-[0_30px_80px_-20px_rgba(16,24,40,0.4)] ring-1 ring-slate-100">
+              <div className="mb-5 flex items-center justify-between">
+                <h3 className="text-xl font-extrabold text-slate-900">
                   {editingProduct ? "Edit Product" : "Add New Product"}
                 </h3>
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-slate-600"
+                >
+                  ✕
+                </button>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                     Product Name
                   </label>
                   <input
@@ -262,7 +299,7 @@ const ManageProducts = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="mb-1.5 block text-sm font-semibold text-slate-700">
                     Description
                   </label>
                   <textarea
@@ -274,38 +311,40 @@ const ManageProducts = () => {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Price (₹)
-                  </label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                    className="input-field w-full"
-                    step="0.01"
-                    min="0"
-                    required
-                  />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+                      Price (₹)
+                    </label>
+                    <input
+                      type="number"
+                      name="price"
+                      value={formData.price}
+                      onChange={handleChange}
+                      className="input-field w-full"
+                      step="0.01"
+                      min="0"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1.5 block text-sm font-semibold text-slate-700">
+                      Stock Qty
+                    </label>
+                    <input
+                      type="number"
+                      name="stock"
+                      value={formData.stock}
+                      onChange={handleChange}
+                      className="input-field w-full"
+                      min="0"
+                      required
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Stock Quantity
-                  </label>
-                  <input
-                    type="number"
-                    name="stock"
-                    value={formData.stock}
-                    onChange={handleChange}
-                    className="input-field w-full"
-                    min="0"
-                    required
-                  />
-                </div>
-
-                <div className="flex space-x-4 pt-4">
+                <div className="flex gap-3 pt-3">
                   <button type="submit" className="btn-primary flex-1">
                     {editingProduct ? "Update Product" : "Add Product"}
                   </button>
