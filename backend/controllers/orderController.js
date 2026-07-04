@@ -45,8 +45,7 @@ const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ user: req.user._id })
       .populate("products.product", "name price")
-      .sort({ createdAt: -1 })
-      .lean();
+      .sort({ createdAt: -1 });
     res.json(orders);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
